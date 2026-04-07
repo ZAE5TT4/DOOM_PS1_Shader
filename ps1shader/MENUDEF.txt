@@ -1,0 +1,49 @@
+AddOptionMenu "OptionsMenu"
+{
+    Submenu "PS1 Shader Options", "PS1Options"
+}
+
+OptionValue "PS1SnapRes"
+{
+    0, "480p (fastest)"
+    1, "360p"
+    2, "320p (SNES)"
+    3, "240p (PS1)"
+    4, "160p"
+    5, "120p"
+    6, "80p"
+    7, "60p (chunkiest)"
+}
+
+OptionValue "PS1ColorDepth"
+{
+    0, "Off (true color)"
+    1, "64 shades"
+    2, "32 shades"
+    3, "16 shades (PS1)"
+    4, "8 shades"
+    5, "4 shades"
+}
+
+OptionMenu "PS1Options"
+{
+    Title "PS1 Shader Options"
+
+    StaticText "-- Master --"
+    Option "Enable PS1 Shader", "ps1_shader_enable", "OnOff"
+    StaticText " "
+
+    StaticText "-- Effects --"
+    Option "Affine Texture Mapping", "ps1_affine_enable", "OnOff"
+    Option "Vertex Snapping", "ps1_snap_enable", "OnOff"
+    Option "Dithering", "ps1_dither_enable", "OnOff"
+    StaticText " "
+
+    StaticText "-- Parameters --"
+    Option "Snap Grid Resolution", "ps1_snap_resolution", "PS1SnapRes"
+    Slider "Affine Warp Strength", "ps1_affine_strength", 0.0, 3.0, 0.05
+    Option "Color Depth Reduction", "ps1_color_depth", "PS1ColorDepth"
+    StaticText " "
+
+    SafeCommand "Reset to Defaults", "resetcvar ps1_shader_enable; resetcvar ps1_affine_enable; resetcvar ps1_snap_enable; resetcvar ps1_dither_enable; resetcvar ps1_snap_resolution; resetcvar ps1_affine_strength; resetcvar ps1_color_depth"
+}

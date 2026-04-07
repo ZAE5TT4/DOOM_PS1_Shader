@@ -1,0 +1,7 @@
+HardwareShader PostProcess Scene
+{
+    Name "ps1shader"
+    Shader "shaders/ps1shader.fp" 330
+    Uniform int ps1Flags
+    Uniform int ps1Params
+}
