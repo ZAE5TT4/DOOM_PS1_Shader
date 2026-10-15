@@ -46,9 +46,14 @@ class PS1Handler : EventHandler
         if (ditherOn) { flags |= 4; }
         flags |= (colorD & 0xF) << 4;
 
-        int snapIdx   = PS1Functions.GetSnapIndex(p);
-        int affineInt = clamp(int(PS1Functions.GetAffineStrength(p) * 50.0), 0, 150);
-        int params    = (snapIdx & 0xFF) | ((affineInt & 0xFF) << 8);
+        int snapIdx    = PS1Functions.GetSnapIndex(p);
+        int affineInt  = clamp(int(PS1Functions.GetAffineStrength(p) * 50.0), 0, 150);
+        int ditherMode = PS1Functions.GetDitherMode(p);
+        int preserveInt = clamp(int(PS1Functions.GetColorPreservation(p) * 100.0 + 0.5), 0, 100);
+        int params     = (snapIdx & 0xFF)
+                       | ((affineInt & 0xFF) << 8)
+                       | ((ditherMode & 0x3) << 16)
+                       | ((preserveInt & 0x7F) << 18);
 
         Shader.SetEnabled(p, "ps1shader", true);
         Shader.SetUniform1i(p, "ps1shader", "ps1Flags",  flags);

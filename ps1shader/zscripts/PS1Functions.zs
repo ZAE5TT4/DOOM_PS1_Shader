@@ -24,7 +24,7 @@ class PS1Functions : Object
     static bool DitherEnabled(PlayerInfo p)
     {
         let cv = CVar.GetCVar('ps1_dither_enable', p);
-        if (cv == null) { return true; }
+        if (cv == null) { return false; }
         return cv.GetBool();
     }
 
@@ -48,4 +48,18 @@ class PS1Functions : Object
         if (cv == null) { return 3; }
         return clamp(cv.GetInt(), 0, 5);
     }
+    static int GetDitherMode(PlayerInfo p)
+    {
+        let cv = CVar.GetCVar('ps1_dither_mode', p);
+        if (cv == null) { return 2; }
+        return clamp(cv.GetInt(), 0, 2);
+    }
+
+    static float GetColorPreservation(PlayerInfo p)
+    {
+        let cv = CVar.GetCVar('ps1_color_preservation', p);
+        if (cv == null) { return 0.75; }
+        return clamp(cv.GetFloat(), 0.0, 1.0);
+    }
+
 }
